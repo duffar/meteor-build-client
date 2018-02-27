@@ -16,13 +16,14 @@ var argPath = process.argv[2],
 
 // execute shell scripts
 var execute = function(command, name) {
+    var noSpinner = process.env.NO_MBC_SPINNER;
     return new Q(function(resolve, reject) {
-        spinner.start();
+        noSpinner || spinner.start();
         
         spawn(command[0], command.slice(1), {
             cwd: basePath
         },function(err, stdout, stderr) {
-            spinner.stop();
+            noSpinner || spinner.stop();
 
             if (err){
                 console.log(err.message);
