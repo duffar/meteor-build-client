@@ -21,7 +21,8 @@ var execute = function(command, name) {
         noSpinner || spinner.start();
         
         spawn(command[0], command.slice(1), {
-            cwd: basePath
+            cwd: basePath,
+            env: process.env
         },function(err, stdout, stderr) {
             noSpinner || spinner.stop();
 
